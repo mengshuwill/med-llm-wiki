@@ -2,6 +2,8 @@
 
 A Claude Code skill for building a Karpathy-style personal knowledge base, designed for medical researchers.
 
+[中文](README.zh.md)
+
 ## What is this?
 
 This is a **skill** for Claude Code that turns your scattered research materials — papers, guidelines, trial protocols, clinical notes, stats plans — into a structured, interlinked, git-backed Markdown wiki maintained by an LLM.
@@ -21,7 +23,7 @@ Medical knowledge is uniquely suited to this approach:
 ### Install
 
 ```bash
-npx add-skill william/mmed-llm-wiki
+npx add-skill mengshuwill/med-llm-wiki
 ```
 
 Or add to your project's `CLAUDE.md`:
