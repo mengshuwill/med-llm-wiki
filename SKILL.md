@@ -36,7 +36,9 @@ your-med-wiki/
 │   ├── biomarkers/         #   egfr-l858r.md, hba1c.md, ...
 │   ├── methods/            #   rct-design.md, cox-regression.md, ...
 │   ├── guidelines/         #   nccn-2025.md, esc-2024.md, ...
-│   └── concepts/           #   pdl1-testing.md, intention-to-treat.md, ...
+│   ├── concepts/           #   pdl1-testing.md, intention-to-treat.md, ...
+│   ├── datasets/           #   mimic-cxr.md, chexpert.md, brats.md, ...
+│   └── models/             #   nnunet.md, totalsegmentator.md, chexnet.md, ...
 ├── schema.md               # Rules for the LLM: structure, naming, templates
 └── CLAUDE.md               # (optional) project-level instructions
 ```
@@ -76,6 +78,11 @@ Add new source material to the wiki.
 - Drug/disease/gene/biomarker mentions
 - Funding source and conflicts of interest
 - PMID / DOI / ClinicalTrials.gov ID
+
+**Medical imaging AI extraction:**
+- When ingesting a **model paper**: extract architecture, task, training datasets, evaluation metrics, comparison to prior SOTA, code/weights availability, external validation status
+- When ingesting a **dataset paper**: extract modality, anatomy, annotation type, sample size, access level, annotation process (who, inter-rater agreement), known biases
+- When ingesting an **imaging AI application paper**: extract clinical task, model used, dataset, performance metrics, reader study design (if any), clinical integration claims
 
 ### 2. Query (`/med-llm-wiki query <question>`)
 
@@ -177,10 +184,74 @@ updated: YYYY-MM-DD
 ## References
 ```
 
+**Dataset page** (`wiki/datasets/<name>.md`):
+```markdown
+---
+aliases: []
+type: dataset
+modality: [X-ray, CT, MRI, ultrasound, PET]
+anatomy: [chest, brain, breast, multi-organ]
+annotation_type: [classification, segmentation, bounding-box, report]
+size: 0
+access: [open, registration, restricted]
+license: []
+url: ""
+updated: YYYY-MM-DD
+---
+
+# Dataset Name
+
+## Overview
+## Data Collection
+### Source
+### Demographics
+### Annotation Process
+## Benchmark Results
+| Task | Model | Metric | Value | Source |
+|------|-------|--------|-------|--------|
+## Known Biases and Limitations
+## Key Papers
+## References
+```
+
+**Model page** (`wiki/models/<name>.md`):
+```markdown
+---
+aliases: []
+type: model
+architecture: [CNN, U-Net, ViT, GAN, diffusion, VLM]
+task: [classification, segmentation, detection, registration, generation, report]
+input_modality: [X-ray, CT, MRI, ultrasound, PET, multimodal]
+framework: [PyTorch, TensorFlow, MONAI]
+code_url: ""
+deployment: [research-only, FDA-cleared, CE-marked, clinical-routine]
+updated: YYYY-MM-DD
+---
+
+# Model Name
+
+## Overview
+## Architecture
+### Key Design Choices
+### Input/Output
+## Training
+| Aspect | Detail |
+|--------|--------|
+| Training Dataset(s) | |
+| Validation Strategy | |
+## Performance
+| Dataset | Task | Metric | This Model | Prior SOTA |
+|---------|------|--------|------------|-------------|
+## External Validation
+## Known Limitations
+## Clinical Impact
+## Key References
+```
+
 ### YAML Frontmatter Convention
 
 Every wiki page must have:
-- `type`: one of `disease`, `drug`, `biomarker`, `method`, `guideline`, `concept`, `trial`
+- `type`: one of `disease`, `drug`, `biomarker`, `method`, `guideline`, `concept`, `trial`, `dataset`, `model`
 - `updated`: ISO date of last LLM modification
 - `aliases`: list of synonyms or alternative names
 
@@ -312,6 +383,10 @@ Beyond the standard checks, medical lint includes:
 4. **Missing PICO**: Study summaries missing Population, Intervention, Comparison, Outcome
 5. **Orphan drugs/biomarkers**: Entities mentioned but without a dedicated page
 6. **Recalled/withdrawn drugs**: Check if referenced drugs have safety alerts
+7. **Data leakage (imaging)**: Flag when a model's training and test sets draw from the same institution or patient cohort without clear separation
+8. **Missing external validation (imaging)**: Flag model pages that report only internal test performance without external cohort results
+9. **Dataset version drift**: Flag when a model reports results on a dataset version that has since been updated or superseded
+10. **Benchmark gaming**: Flag when a model page reports only on cherry-picked metrics or subsets without acknowledging overall performance
 
 ## Privacy Note
 

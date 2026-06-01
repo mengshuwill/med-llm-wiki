@@ -22,6 +22,8 @@ wiki/                   # LLM-maintained knowledge pages
   guidelines/
   concepts/
   trials/
+  datasets/
+  models/
 ```
 
 ## Naming Convention
@@ -37,7 +39,7 @@ wiki/                   # LLM-maintained knowledge pages
 Every wiki page must have:
 ```yaml
 ---
-type: disease | drug | biomarker | method | guideline | concept | trial
+type: disease | drug | biomarker | method | guideline | concept | trial | dataset | model
 updated: YYYY-MM-DD
 aliases: [synonym1, synonym2]
 ---
@@ -56,6 +58,15 @@ Optional fields by type:
 | `nct_id` | trial | ClinicalTrials.gov ID |
 | `guideline_organization` | guideline | NCCN, ESC, AHA, WHO, NICE, ... |
 | `guideline_year` | guideline | YYYY |
+| `modality` | dataset, model | X-ray, CT, MRI, ultrasound, PET, multimodal |
+| `anatomy` | dataset | chest, brain, breast, lung, whole-body, multi-organ |
+| `annotation_type` | dataset | classification, segmentation, bounding-box, report |
+| `access` | dataset | open, registration, restricted |
+| `architecture` | model | CNN, U-Net, ViT, GAN, diffusion, VLM, LLM |
+| `task` | model | classification, segmentation, detection, registration, generation, report |
+| `framework` | model | PyTorch, TensorFlow, MONAI |
+| `code_url` | model | URL to official implementation |
+| `deployment` | model | research-only, FDA-cleared, CE-marked, clinical-routine |
 | `status` | any | current, superseded, controversial, historical |
 
 ## Cross-Referencing
@@ -81,8 +92,8 @@ Inline evidence tags help readers gauge claim reliability:
 When ingesting a new source:
 
 1. **Read** the raw source completely
-2. **Identify** all mentioned diseases, drugs, biomarkers, methods, and concepts
-3. **Extract** PICO elements for any study described
+2. **Identify** all mentioned diseases, drugs, biomarkers, methods, concepts, datasets, and models
+3. **Extract** PICO elements for any study described; extract architecture/dataset/metrics for AI model papers; extract modality/size/annotation for dataset papers
 4. **Create** new wiki pages for novel entities (following templates)
 5. **Update** existing pages with new findings or references
 6. **Link** new pages from existing ones where relevant

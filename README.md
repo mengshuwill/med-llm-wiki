@@ -83,6 +83,8 @@ your-med-wiki/
 │   ├── methods/
 │   ├── guidelines/
 │   ├── concepts/
+│   ├── datasets/
+│   ├── models/
 │   └── trials/
 └── schema.md               # LLM rules and conventions
 ```
@@ -98,6 +100,8 @@ your-med-wiki/
 | Guideline | `nccn-nsclc-2025.md` | Recommendations, evidence base, version history |
 | Method | `cox-regression.md` | When to use, assumptions, interpretation, common pitfalls |
 | Concept | `pdl1-testing.md` | Cross-cutting topics that span multiple entity types |
+| Dataset | `mimic-cxr.md` | Modality, anatomy, annotation, benchmarks, biases, access |
+| Model | `nnunet.md` | Architecture, task, training data, performance, deployment status |
 
 ## Evidence Grading
 
@@ -121,7 +125,7 @@ Every claim is tagged with an evidence level:
 
 | Feature | Generic LLM Wiki | Med LLM Wiki |
 |---------|-----------------|--------------|
-| Entity types | Generic (concept, entity) | Disease, Drug, Biomarker, Trial, Guideline, Method |
+| Entity types | Generic (concept, entity) | Disease, Drug, Biomarker, Trial, Guideline, Method, Dataset, Model |
 | Templates | Minimal | Full PICO-structured templates per type |
 | Evidence grading | None | GRADE-based with guideline attribution |
 | Lint rules | Broken links, orphans | + evidence decay, guideline versioning, drug safety alerts |

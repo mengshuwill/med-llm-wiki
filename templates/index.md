@@ -55,5 +55,35 @@ updated: {{DATE}}
 ## Concepts
 <!-- LLM: add new concept pages here -->
 
+## Datasets
+<!-- LLM: add new dataset pages here, grouped by modality -->
+
+### X-ray
+
+### CT
+
+### MRI
+
+### Ultrasound
+
+### PET/SPECT
+
+### Multimodal
+
+## Models
+<!-- LLM: add new model pages here, grouped by task -->
+
+### Classification
+
+### Segmentation
+
+### Detection
+
+### Report Generation
+
+### Foundation Models
+
+### Other
+
 ## Key Trials
 <!-- LLM: add links to pivotal trials -->
